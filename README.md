@@ -1,8 +1,8 @@
-# RetroBarbarian Mercantile Website and Inventory Management
+# Gaming Mercantile Website and Inventory Management Application
 ## Author Sid Hinson
 ## Tech Stack
 ### Backend
 - Asp.net API
 - Entity Framework
-- PostGres
+- PostgreSQL
 ## MIT license
