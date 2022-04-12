@@ -1,6 +1,5 @@
 BackEnd/RetroBarbApi/appsettings.Development.json
 BackEnd/RetroBarbApi/appsettings.json
-Backend/RetroBarbApi/bin
-Backend/RetroBarbApi/obj
 bin
 obj
+.vscode
