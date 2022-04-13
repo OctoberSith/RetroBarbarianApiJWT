@@ -1,86 +1,90 @@
-﻿namespace RetroModels;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RetroModels;
 public class Customers
 {
+    [Key]
     public int CustomerID { get; set; }
-    private string _CustomerFirst;
+
+    private string _customerFirst;
     public string CustomerFirst
     {
-        get { return _CustomerFirst; }
-        set { _CustomerFirst = value; }
+        get { return _customerFirst; }
+        set { _customerFirst = value; }
     }
 
-    private string _CustomerLast;
+    private string _customerLast;
     public string CustomerLast
     {
-        get { return _CustomerLast; }
-        set { _CustomerLast = value; }
+        get { return _customerLast; }
+        set { _customerLast = value; }
     }
     
 
-    private int _BirthMonth;
+    private int _birthMonth;
     public int BirthMonth
     {
-        get { return _BirthMonth; }
-        set { _BirthMonth = value; }
+        get { return _birthMonth; }
+        set { _birthMonth = value; }
     
     }
 
-    private int _BirthDay;
+    private int _birthDay;
     public int BirthDay
     {
-        get { return _BirthDay; }
-        set { _BirthDay = value; }
+        get { return _birthDay; }
+        set { _birthDay = value; }
     
     }
 
-    private int _BirthYear;
+    private int _birthYear;
     public int BirthYear
     {
-        get { return _BirthYear; }
-        set { _BirthYear = value; }
+        get { return _birthYear; }
+        set { _birthYear = value; }
     
     }
 
-    private string _Address;
+    private string _address;
     public string Address
     {
-        get { return _Address; }
-        set { _Address = value; }
+        get { return _address; }
+        set { _address = value; }
     }
     
-    private string _City;
+    private string _city;
     public string City
     {
-        get { return _City; }
-        set { _City = value; }
+        get { return _city; }
+        set { _city = value; }
     }
     
-    private string _State;
+    private string _state;
     public string MyProperty
     {
-        get { return _State; }
-        set { _State = value; }
+        get { return _state; }
+        set { _state = value; }
     }
 
-    private int _Zipcode;
+    private int _zipcode;
     public int Zipcode
     {
-        get { return _Zipcode; }
-        set { _Zipcode = value; }
+        get { return _zipcode; }
+        set { _zipcode = value; }
     }
 
-    private string _Email;
+    private string _email;
     public string Email
     {
-        get { return _Email; }
-        set { _Email = value; }
+        get { return _email; }
+        set { _email = value; }
     }
     
-    private string _Password;
+    private string _password;
     public string Password
     {
-        get { return _Password; }
-        set { _Password = value; }
+        get { return _password; }
+        set { _password = value; }
     }
     
 
