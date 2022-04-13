@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RetroModels;
 
-public class OrderCartItems
+public class CartItems
 {
     [Key]
     public int CartID { get; set; }

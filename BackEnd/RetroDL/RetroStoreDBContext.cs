@@ -8,7 +8,7 @@ namespace RetroDL
     {
         public DbSet<Customers> Customers {get; set;}
         public DbSet<Inventory> Inventory {get; set;}
-        public DbSet<OrderCartItems> OrderCartItems {get; set;}
+        public DbSet<CartItems> OrderCartItems {get; set;}
         public DbSet<Orders> Orders {get; set;}
         public DbSet<Products> Products {get; set;}
 
@@ -32,7 +32,7 @@ namespace RetroDL
             p_ModelBuilder.Entity<Inventory>()
                 .Property(p => p.ProductPrice)
                 .HasColumnType("decimal(10,2)");
-            p_ModelBuilder.Entity<OrderCartItems>()
+            p_ModelBuilder.Entity<CartItems>()
                 .Property(p => p.ProductPrice)
                 .HasColumnType("decimal(10,2)");
             p_ModelBuilder.Entity<Orders>()

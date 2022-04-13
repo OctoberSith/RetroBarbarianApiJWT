@@ -24,8 +24,8 @@ public class Orders
     }
     
 
-    private List<OrderCartItems> _orderCart = new List<OrderCartItems>();
-    public List<OrderCartItems> OrderCart { get => _orderCart; set => _orderCart = value; }
+    private List<CartItems> _orderCart = new List<CartItems>();
+    public List<CartItems> OrderCart { get => _orderCart; set => _orderCart = value; }
 
 
     private string _orderStatusCode;
