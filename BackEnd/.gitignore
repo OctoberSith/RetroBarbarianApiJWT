@@ -1,0 +1,5 @@
+RetroBarbApi/appsettings.Development.json
+RetroBarbApi/appsettings.json
+bin
+obj
+.vscode

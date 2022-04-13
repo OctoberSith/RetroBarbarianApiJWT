@@ -4,5 +4,5 @@
 ### Backend
 - Asp.net API
 - Entity Framework
-- PostgreSQL
+- AzureSQL
 ## MIT license
