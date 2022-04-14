@@ -13,7 +13,7 @@ namespace RetroBL;
         /// Get all the Resources in a Database
         /// </summary>
         /// <returns></returns>
-        List<T> GetAll();
+        Task<List<T>> GetAll();
         /// <summary>
         /// Updates the Resources in a Database
         /// </summary>

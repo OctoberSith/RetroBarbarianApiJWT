@@ -4,9 +4,9 @@ using RetroDL;
 namespace RetroBL;
 public class ProductsBL : IRetroBL<Products>
 {
-    private readonly DbContextProductsRepo _repo;
+    private readonly IRepository<Products> _repo;
 
-    public ProductsBL(DbContextProductsRepo repo)
+    public ProductsBL(IRepository<Products> repo)
     {
         _repo = repo;
     }
@@ -21,9 +21,9 @@ public class ProductsBL : IRetroBL<Products>
         return await _repo.Delete(p_resource);
     }
 
-    public List<Products> GetAll()
+    public async Task<List<Products>> GetAll()
     {
-        return _repo.GetAll();
+        return await _repo.GetAll();
     }
 
     public async Task<Products> Update(Products p_resource)

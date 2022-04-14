@@ -21,11 +21,11 @@ namespace RetroBarbApi.Controllers
         }
 
         [HttpGet("GetAllInventory")]
-        public IActionResult GetAllInventory()
+        public async Task<IActionResult> GetAllInventory()
         {
             try
             {
-                return Ok(_invBL.GetAll());
+                return Ok(await _invBL.GetAll());
             }
             catch (BadHttpRequestException)
             {

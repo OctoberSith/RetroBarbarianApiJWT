@@ -4,9 +4,9 @@ using RetroDL;
 namespace RetroBL;
 public class InventoryBL : IRetroBL<Inventory>
 {   
-    private readonly DbContextInventoryRepo _repo;
+    private readonly IRepository<Inventory> _repo;
 
-    public InventoryBL(DbContextInventoryRepo repo)
+    public InventoryBL(IRepository<Inventory> repo)
     {
         _repo = repo;
     }
@@ -21,9 +21,9 @@ public class InventoryBL : IRetroBL<Inventory>
         return await _repo.Delete(p_resource);
     }
 
-    public List<Inventory> GetAll()
+    public async Task<List<Inventory>> GetAll()
     {
-        return _repo.GetAll();
+        return await _repo.GetAll();
     }
 
     public async Task<Inventory> Update(Inventory p_resource)

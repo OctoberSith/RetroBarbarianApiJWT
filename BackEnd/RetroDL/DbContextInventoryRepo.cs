@@ -1,4 +1,5 @@
-﻿using RetroModels;
+﻿using Microsoft.EntityFrameworkCore;
+using RetroModels;
 namespace RetroDL;
 public class DbContextInventoryRepo : IRepository<Inventory>
 {
@@ -11,25 +12,32 @@ public class DbContextInventoryRepo : IRepository<Inventory>
 
     public async Task<Inventory> Add(Inventory p_resource)
     {
+        await _context.Database.BeginTransactionAsync();
         await _context.AddAsync(p_resource);
+        await _context.Database.CommitTransactionAsync();
         await _context.SaveChangesAsync();
         return p_resource;
     }
 
     public async Task<Inventory> Delete(Inventory p_resource)
     {
+        await _context.Database.BeginTransactionAsync();
         _context.Remove(p_resource);
+        await _context.Database.CommitTransactionAsync();
         await _context.SaveChangesAsync();
         return p_resource;
     }
-    public List<Inventory> GetAll()
+    public async Task<List<Inventory>> GetAll()
     {
-        return _context.Inventory.ToList<Inventory>();
+        return await _context.Inventory.ToListAsync<Inventory>();
     }
+
 
     public async Task<Inventory> Update(Inventory p_resource)
     {
+        await _context.Database.BeginTransactionAsync();
         _context.Update(p_resource);
+        await _context.Database.CommitTransactionAsync();
         await _context.SaveChangesAsync();
         return p_resource;
     }

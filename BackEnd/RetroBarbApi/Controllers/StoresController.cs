@@ -21,11 +21,11 @@ namespace RetroBarbApi.Controllers
         }
 
         [HttpGet("GetAllStores")]
-        public IActionResult GetAllStores()
+        public async Task<IActionResult> GetAllStores()
         {
             try
             {
-                return Ok(_prodBL.GetAll());
+                return Ok(await _prodBL.GetAll());
             }
             catch (BadHttpRequestException)
             {

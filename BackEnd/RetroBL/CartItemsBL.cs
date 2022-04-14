@@ -4,9 +4,9 @@ using RetroDL;
 namespace RetroBL;
 public class CartItemsBL : IRetroBL<CartItems>
 {
-    private readonly DbContextCartItemsRepo _repo;
+    private readonly IRepository<CartItems> _repo;
 
-    public CartItemsBL(DbContextCartItemsRepo repo)
+    public CartItemsBL(IRepository<CartItems> repo)
     {
         _repo = repo;
     }
@@ -21,9 +21,9 @@ public class CartItemsBL : IRetroBL<CartItems>
         return await _repo.Delete(p_resource);
     }
 
-    public List<CartItems> GetAll()
+    public async Task<List<CartItems>> GetAll()
     {
-        return _repo.GetAll();
+        return await _repo.GetAll();
     }
 
     public async Task<CartItems> Update(CartItems p_resource)

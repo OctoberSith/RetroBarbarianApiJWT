@@ -4,9 +4,9 @@ using RetroDL;
 namespace RetroBL;
 public class OrdersBL : IRetroBL<Orders>
 {
-    private readonly DbContextOrdersRepo _repo;
+    private readonly IRepository<Orders> _repo;
 
-    public OrdersBL(DbContextOrdersRepo repo)
+    public OrdersBL(IRepository<Orders> repo)
     {
         _repo = repo;
     }
@@ -21,9 +21,9 @@ public class OrdersBL : IRetroBL<Orders>
         return await _repo.Delete(p_resource);
     }
 
-    public List<Orders> GetAll()
+    public async Task<List<Orders>> GetAll()
     {
-        return _repo.GetAll();
+        return await _repo.GetAll();
     }
 
     public async Task<Orders> Update(Orders p_resource)

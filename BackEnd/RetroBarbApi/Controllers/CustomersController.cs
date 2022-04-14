@@ -23,11 +23,11 @@ namespace RetroBarbApi.Controllers
         }
 
         [HttpGet("GetAllCustomers")]
-        public IActionResult GetAllCustomers()
+        public async Task<IActionResult> GetAllCustomers()
         {
             try
             {
-                return Ok(_custBL.GetAll());
+                return Ok(await _custBL.GetAll());
             }
             catch (BadHttpRequestException)
             {
@@ -35,7 +35,7 @@ namespace RetroBarbApi.Controllers
             }
         }
 
-        
+
         [HttpPost("PostCustomers")]
         public async Task<IActionResult> AddCustomers(Customers p_resource)
         {

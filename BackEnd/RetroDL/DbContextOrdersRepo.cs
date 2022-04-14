@@ -1,4 +1,5 @@
-﻿using RetroModels;
+﻿using Microsoft.EntityFrameworkCore;
+using RetroModels;
 namespace RetroDL;
 public class DbContextOrdersRepo : IRepository<Orders>
 {
@@ -11,26 +12,32 @@ public class DbContextOrdersRepo : IRepository<Orders>
 
     public async Task<Orders> Add(Orders p_resource)
     {
+        await _context.Database.BeginTransactionAsync();
         await _context.AddAsync(p_resource);
+        await _context.Database.CommitTransactionAsync();
         await _context.SaveChangesAsync();
         return p_resource;
     }
 
     public async Task<Orders> Delete(Orders p_resource)
     {
+        await _context.Database.BeginTransactionAsync();
         _context.Remove(p_resource);
+        await _context.Database.CommitTransactionAsync();
         await _context.SaveChangesAsync();
         return p_resource;
     }
 
-    public List<Orders> GetAll()
+    public async Task<List<Orders>> GetAll()
     {
-        return _context.Orders.ToList<Orders>();
+        return await _context.Orders.ToListAsync<Orders>();
     }
 
     public async Task<Orders> Update(Orders p_resource)
     {
+        await _context.Database.BeginTransactionAsync();
         _context.Update(p_resource);
+        await _context.Database.CommitTransactionAsync();
         await _context.SaveChangesAsync();
         return p_resource;
     }
