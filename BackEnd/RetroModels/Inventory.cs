@@ -29,6 +29,16 @@ public class Inventory
         set { _inventoryQuantity = value; }
     }
 
+    private int _storeID;
+    public int StoreID
+    {
+        get { return _storeID; }
+        set { _storeID = value; }
+    }
+    
+    
+    [ForeignKey("StoreID")]
+    public virtual Stores Stores { get; set; }
     [ForeignKey("ProductID")]
     public virtual Products Products { get; set; }
     

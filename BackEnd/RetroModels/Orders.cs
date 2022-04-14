@@ -41,7 +41,17 @@ public class Orders
         get { return _orderTotal; }
         set { _orderTotal = value; }
     }
-
+    
+    private int _storeID;
+    public int StoreID
+    {
+        get { return _storeID; }
+        set { _storeID = value; }
+    }
+    
+    
+    [ForeignKey("StoreID")]
+    public virtual Stores Stores { get; set; }
     [ForeignKey("CustomerID")]
     public virtual Customers Customers { get; set; }
 }

@@ -11,6 +11,7 @@ namespace RetroDL
         public DbSet<CartItems> CartItems {get; set;}
         public DbSet<Orders> Orders {get; set;}
         public DbSet<Products> Products {get; set;}
+        public DbSet<Stores> Stores {get; set;}
 
         public RetroStoreDBContext() : base()
         {

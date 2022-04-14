@@ -60,7 +60,7 @@ public class Customers
     }
     
     private string _state;
-    public string MyProperty
+    public string State
     {
         get { return _state; }
         set { _state = value; }
@@ -73,6 +73,13 @@ public class Customers
         set { _zipcode = value; }
     }
 
+    private string _country;
+    public string Country
+    {
+        get { return _country; }
+        set { _country = value; }
+    }
+    
     private string _email;
     public string Email
     {

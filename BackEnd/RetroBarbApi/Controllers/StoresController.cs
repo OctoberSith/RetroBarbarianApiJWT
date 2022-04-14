@@ -11,35 +11,21 @@ namespace RetroBarbApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CartItemsController : ControllerBase
+    public class StoresController : ControllerBase
     {
-        private readonly CartItemsBL _cartBL;
+        private readonly StoresBL _prodBL;
 
-        public CartItemsController(CartItemsBL cartBL)
+        public StoresController(StoresBL prodBL)
         {
-            _cartBL = cartBL;
+            _prodBL = prodBL;
         }
 
-        [HttpGet("GetAllCartItems")]
-        public IActionResult GetAllCartItems()
+        [HttpGet("GetAllStores")]
+        public IActionResult GetAllStores()
         {
             try
             {
-                return Ok(_cartBL.GetAll());
-            }
-            catch (BadHttpRequestException)
-            {
-                return StatusCode(404, "Not Found");
-            }
-        }
-
-        
-        [HttpPost("PostCartItems")]
-        public async Task<IActionResult> AddCartItems(CartItems p_resource)
-        {
-            try
-            {
-                return Ok(await _cartBL.Add(p_resource));
+                return Ok(_prodBL.GetAll());
             }
             catch (BadHttpRequestException)
             {
@@ -47,13 +33,12 @@ namespace RetroBarbApi.Controllers
             }
         }
         
-
-        [HttpPut("PutCartItems")]
-        public async Task<IActionResult> UpdateCartItems(CartItems p_resource)
+        [HttpPost("PostStores")]
+        public async Task<IActionResult> AddStores(Stores p_resource)
         {
             try
             {
-                return Ok( await _cartBL.Update(p_resource));
+                return Ok(await _prodBL.Add(p_resource));
             }
             catch (BadHttpRequestException)
             {
@@ -61,13 +46,12 @@ namespace RetroBarbApi.Controllers
             }
         }
         
-
-        [HttpDelete("DeleteCartItems")]
-        public async Task<IActionResult> DeleteCartItems(CartItems p_resource)
+        [HttpPut("PutStores")]
+        public async Task<IActionResult> UpdateStores(Stores p_resource)
         {
             try
             {
-                return Ok(await _cartBL.Delete(p_resource));
+                return Ok( await _prodBL.Update(p_resource));
             }
             catch (BadHttpRequestException)
             {
@@ -75,6 +59,18 @@ namespace RetroBarbApi.Controllers
             }
         }
         
+        [HttpDelete("DeleteStores")]
+        public async Task<IActionResult> DeleteStores(Stores p_resource)
+        {
+            try
+            {
+                return Ok(await _prodBL.Delete(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
 
     }
 }

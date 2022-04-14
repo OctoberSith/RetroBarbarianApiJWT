@@ -21,7 +21,7 @@ namespace RetroBarbApi.Controllers
         }
 
         [HttpGet("GetAllProducts")]
-        public async Task<IActionResult> GetAllProducts()
+        public IActionResult GetAllProducts()
         {
             try
             {
