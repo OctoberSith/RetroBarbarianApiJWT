@@ -11,60 +11,21 @@ namespace RetroBarbApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class CartItemsController : ControllerBase
     {
-        private readonly OrdersBL _ordBL;
+        private readonly CartItemsBL _cartBL;
 
-        public OrdersController(OrdersBL ordBL)
+        public CartItemsController(CartItemsBL cartBL)
         {
-            _ordBL = ordBL;
+            _cartBL = cartBL;
         }
 
-        [HttpGet("GetAllOrders")]
-        public async Task<IActionResult> GetAllOrders()
+        [HttpGet("GetAllCartItems")]
+        public async Task<IActionResult> GetAllCartItems()
         {
             try
             {
-                return Ok(_ordBL.GetAll());
-            }
-            catch (BadHttpRequestException)
-            {
-                return StatusCode(404, "Not Found");
-            }
-        }
-        
-        [HttpPost("PostOrders")]
-        public async Task<IActionResult> AddInventory(Orders p_resource)
-        {
-            try
-            {
-                return Ok(await _ordBL.Add(p_resource));
-            }
-            catch (BadHttpRequestException)
-            {
-                return StatusCode(404, "Not Found");
-            }
-        }
-        
-        [HttpPut("PutOrders")]
-        public async Task<IActionResult> UpdateOrders(Orders p_resource)
-        {
-            try
-            {
-                return Ok( await _ordBL.Update(p_resource));
-            }
-            catch (BadHttpRequestException)
-            {
-                return StatusCode(404, "Not Found");
-            }
-        }
-        
-        [HttpDelete("DeleteOrders")]
-        public async Task<IActionResult> DeleteOrders(Orders p_resource)
-        {
-            try
-            {
-                return Ok(await _ordBL.Delete(p_resource));
+                return Ok(_cartBL.GetAll());
             }
             catch (BadHttpRequestException)
             {
@@ -72,6 +33,48 @@ namespace RetroBarbApi.Controllers
             }
         }
 
+        
+        [HttpPost("PostCartItems")]
+        public async Task<IActionResult> AddCartItems(CartItems p_resource)
+        {
+            try
+            {
+                return Ok(await _cartBL.Add(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+
+        [HttpPut("PutCartItems")]
+        public async Task<IActionResult> UpdateCartItems(CartItems p_resource)
+        {
+            try
+            {
+                return Ok( await _cartBL.Update(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+
+        [HttpDelete("DeleteCartItems")]
+        public async Task<IActionResult> DeleteCartItems(CartItems p_resource)
+        {
+            try
+            {
+                return Ok(await _cartBL.Delete(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
 
     }
 }

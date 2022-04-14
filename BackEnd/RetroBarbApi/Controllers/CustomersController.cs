@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RetroModels;
+using RetroBL;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace RetroBarbApi.Controllers
 {
@@ -11,36 +14,68 @@ namespace RetroBarbApi.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        // GET: api/Customer
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IMemoryCache _memorycache;
+        private readonly CustomersBL _custBL;
+        public CustomersController(CustomersBL custBL, IMemoryCache memoryCache)
         {
-            return new string[] { "value1", "value2" };
+            _custBL = custBL;
+            _memorycache = memoryCache;
         }
 
-        // GET: api/Customer/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("GetAllCustomers")]
+        public async Task<IActionResult> GetAllCustomers()
         {
-            return "value";
+            try
+            {
+                return Ok(_custBL.GetAll());
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
         }
 
-        // POST: api/Customer
-        [HttpPost]
-        public void Post([FromBody] string value)
+        
+        [HttpPost("PostCustomers")]
+        public async Task<IActionResult> AddCustomers(Customers p_resource)
         {
+            try
+            {
+                return Ok(await _custBL.Add(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+
+        [HttpPut("PutCustomers")]
+        public async Task<IActionResult> UpdateCustomers(Customers p_resource)
+        {
+            try
+            {
+                return Ok(await _custBL.Update(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+
+        [HttpDelete("DeleteCustomers")]
+        public async Task<IActionResult> DeleteCustomers(Customers p_resource)
+        {
+            try
+            {
+                return Ok(await _custBL.Delete(p_resource));   
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
         }
 
-        // PUT: api/Customer/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/Customer/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

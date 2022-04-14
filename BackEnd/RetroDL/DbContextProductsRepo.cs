@@ -2,23 +2,36 @@
 namespace RetroDL;
 public class DbContextProductsRepo : IRepository<Products>
 {
-    public Task<Products> Add(Products p_resource)
+    private readonly RetroStoreDBContext _context;
+
+    public DbContextProductsRepo(RetroStoreDBContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<Products> Delete(Products p_resource)
+    public async Task<Products> Add(Products p_resource)
     {
-        throw new NotImplementedException();
+        await _context.AddAsync(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 
-    public Task<List<Products>> GetAll()
+    public async Task<Products> Delete(Products p_resource)
     {
-        throw new NotImplementedException();
+        _context.Remove(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 
-    public Task<Products> Update(Products p_resource)
+    public List<Products> GetAll()
     {
-        throw new NotImplementedException();
+        return _context.Products.ToList<Products>();
+    }
+
+    public async Task<Products> Update(Products p_resource)
+    {
+        _context.Update(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 }

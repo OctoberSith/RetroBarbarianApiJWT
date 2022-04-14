@@ -1,8 +1,7 @@
-﻿namespace RetroBL;
-public class IRetroBL
-{
+﻿
+namespace RetroBL;
 
-    public interface BusinessData<T> 
+    public interface IRetroBL<T> 
     {
          /// <summary>
         /// Add a Resource to Repository
@@ -14,7 +13,7 @@ public class IRetroBL
         /// Get all the Resources in a Database
         /// </summary>
         /// <returns></returns>
-        Task<List<T>> GetAll();
+        List<T> GetAll();
         /// <summary>
         /// Updates the Resources in a Database
         /// </summary>
@@ -29,4 +28,3 @@ public class IRetroBL
         Task<T> Delete(T p_resource);
     }
 
-}

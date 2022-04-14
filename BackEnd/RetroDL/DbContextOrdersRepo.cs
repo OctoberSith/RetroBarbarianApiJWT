@@ -2,23 +2,36 @@
 namespace RetroDL;
 public class DbContextOrdersRepo : IRepository<Orders>
 {
-    public Task<Orders> Add(Orders p_resource)
+    private readonly RetroStoreDBContext _context;
+
+    public DbContextOrdersRepo(RetroStoreDBContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<Orders> Delete(Orders p_resource)
+    public async Task<Orders> Add(Orders p_resource)
     {
-        throw new NotImplementedException();
+        await _context.AddAsync(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 
-    public Task<List<Orders>> GetAll()
+    public async Task<Orders> Delete(Orders p_resource)
     {
-        throw new NotImplementedException();
+        _context.Remove(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 
-    public Task<Orders> Update(Orders p_resource)
+    public List<Orders> GetAll()
     {
-        throw new NotImplementedException();
+        return _context.Orders.ToList<Orders>();
+    }
+
+    public async Task<Orders> Update(Orders p_resource)
+    {
+        _context.Update(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 }

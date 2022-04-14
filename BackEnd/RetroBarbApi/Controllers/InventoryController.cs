@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RetroModels;
+using RetroBL;
 
 namespace RetroBarbApi.Controllers
 {
@@ -11,36 +13,64 @@ namespace RetroBarbApi.Controllers
     [ApiController]
     public class InventoryController : ControllerBase
     {
-        // GET: api/Inventory
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly InventoryBL _invBL;
+
+        public InventoryController(InventoryBL invBL)
         {
-            return new string[] { "value1", "value2" };
+            _invBL = invBL;
         }
 
-        // GET: api/Inventory/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("GetAllInventory")]
+        public async Task<IActionResult> GetAllInventory()
         {
-            return "value";
+            try
+            {
+                return Ok(_invBL.GetAll());
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+        [HttpPost("PostInventory")]
+        public async Task<IActionResult> AddInventory(Inventory p_resource)
+        {
+            try
+            {
+                return Ok(await _invBL.Add(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+        [HttpPut("PutInventory")]
+        public async Task<IActionResult> UpdateInventory(Inventory p_resource)
+        {
+            try
+            {
+                return Ok( await _invBL.Update(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+        [HttpDelete("DeleteInventory")]
+        public async Task<IActionResult> DeleteInventory(Inventory p_resource)
+        {
+            try
+            {
+                return Ok(await _invBL.Delete(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
         }
 
-        // POST: api/Inventory
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Inventory/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/Inventory/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

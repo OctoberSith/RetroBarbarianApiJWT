@@ -8,7 +8,7 @@ namespace RetroDL
     {
         public DbSet<Customers> Customers {get; set;}
         public DbSet<Inventory> Inventory {get; set;}
-        public DbSet<CartItems> OrderCartItems {get; set;}
+        public DbSet<CartItems> CartItems {get; set;}
         public DbSet<Orders> Orders {get; set;}
         public DbSet<Products> Products {get; set;}
 

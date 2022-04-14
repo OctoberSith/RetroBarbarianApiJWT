@@ -10,8 +10,8 @@ public class DbContextCustomersRepo : IRepository<Customers>
 
     public async Task<Customers> Add(Customers p_resource)
     {
-        _context.Add(p_resource);
-        _context.SaveChanges();
+        await _context.AddAsync(p_resource);
+        await _context.SaveChangesAsync();
         return p_resource;
         
     }
@@ -19,11 +19,11 @@ public class DbContextCustomersRepo : IRepository<Customers>
     public async Task<Customers> Delete(Customers p_resource)
     {
         _context.Customers.Remove(p_resource);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         return p_resource;
     }
 
-    public async Task<List<Customers>> GetAll()
+    public List<Customers> GetAll()
     {
         return _context.Customers.ToList<Customers>();
     }
@@ -31,7 +31,7 @@ public class DbContextCustomersRepo : IRepository<Customers>
     public async Task<Customers> Update(Customers p_resource)
     {
         _context.Customers.Update(p_resource);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         return p_resource;
     }
 }

@@ -2,23 +2,36 @@
 namespace RetroDL;
 public class DbContextCartItemsRepo : IRepository<CartItems>
 {
-    public Task<CartItems> Add(CartItems p_resource)
+    private readonly RetroStoreDBContext _context;
+
+    public DbContextCartItemsRepo(RetroStoreDBContext p_context)
     {
-        throw new NotImplementedException();
+        _context = p_context;
     }
 
-    public Task<CartItems> Delete(CartItems p_resource)
+    public async Task<CartItems> Add(CartItems p_resource)
     {
-        throw new NotImplementedException();
+        await _context.AddAsync(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 
-    public Task<List<CartItems>> GetAll()
+    public async Task<CartItems> Delete(CartItems p_resource)
     {
-        throw new NotImplementedException();
+        _context.Remove(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 
-    public Task<CartItems> Update(CartItems p_resource)
+    public List<CartItems> GetAll()
     {
-        throw new NotImplementedException();
+        return _context.CartItems.ToList<CartItems>();
+    }
+
+    public async Task<CartItems> Update(CartItems p_resource)
+    {
+        _context.Update(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 }

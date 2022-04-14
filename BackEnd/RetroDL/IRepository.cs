@@ -11,7 +11,7 @@ public interface IRepository<T>
         /// Get all the Resources in a Database
         /// </summary>
         /// <returns></returns>
-        Task<List<T>> GetAll();
+        List<T> GetAll();
         /// <summary>
         /// Updates the Resources in a Database
         /// </summary>

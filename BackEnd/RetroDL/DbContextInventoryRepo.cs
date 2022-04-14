@@ -2,23 +2,36 @@
 namespace RetroDL;
 public class DbContextInventoryRepo : IRepository<Inventory>
 {
-    public Task<Inventory> Add(Inventory p_resource)
+    private readonly RetroStoreDBContext _context;
+
+    public DbContextInventoryRepo(RetroStoreDBContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<Inventory> Delete(Inventory p_resource)
+    public async Task<Inventory> Add(Inventory p_resource)
     {
-        throw new NotImplementedException();
+        await _context.AddAsync(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
 
-    public Task<List<Inventory>> GetAll()
+    public async Task<Inventory> Delete(Inventory p_resource)
     {
-        throw new NotImplementedException();
+        _context.Remove(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
+    }
+    public List<Inventory> GetAll()
+    {
+        return _context.Inventory.ToList<Inventory>();
     }
 
-    public Task<Inventory> Update(Inventory p_resource)
+    public async Task<Inventory> Update(Inventory p_resource)
     {
-        throw new NotImplementedException();
+        _context.Update(p_resource);
+        await _context.SaveChangesAsync();
+        return p_resource;
     }
+    
 }

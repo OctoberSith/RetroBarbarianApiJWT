@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RetroModels;
+using RetroBL;
 
 namespace RetroBarbApi.Controllers
 {
@@ -11,36 +13,64 @@ namespace RetroBarbApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        // GET: api/Products
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ProductsBL _prodBL;
+
+        public ProductsController(ProductsBL prodBL)
         {
-            return new string[] { "value1", "value2" };
+            _prodBL = prodBL;
         }
 
-        // GET: api/Products/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("GetAllProducts")]
+        public async Task<IActionResult> GetAllProducts()
         {
-            return "value";
+            try
+            {
+                return Ok(_prodBL.GetAll());
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+        [HttpPost("PostProducts")]
+        public async Task<IActionResult> AddProducts(Products p_resource)
+        {
+            try
+            {
+                return Ok(await _prodBL.Add(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+        [HttpPut("PutProducts")]
+        public async Task<IActionResult> UpdateProducts(Products p_resource)
+        {
+            try
+            {
+                return Ok( await _prodBL.Update(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+        }
+        
+        [HttpDelete("DeleteProducts")]
+        public async Task<IActionResult> DeleteProducts(Products p_resource)
+        {
+            try
+            {
+                return Ok(await _prodBL.Delete(p_resource));
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(404, "Not Found");
+            }
         }
 
-        // POST: api/Products
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Products/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/Products/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
