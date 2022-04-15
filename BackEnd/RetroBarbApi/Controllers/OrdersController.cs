@@ -20,7 +20,7 @@ namespace RetroBarbApi.Controllers
             _ordBL = ordBL;
         }
 
-        [HttpGet("GetAllOrders")]
+        [HttpGet("alpha")]
         public async Task<IActionResult> GetAllOrders()
         {
             try
@@ -33,7 +33,7 @@ namespace RetroBarbApi.Controllers
             }
         }
         
-        [HttpPost("PostOrders")]
+        [HttpPost("beta")]
         public async Task<IActionResult> AddInventory(Orders p_resource)
         {
             try
@@ -46,7 +46,7 @@ namespace RetroBarbApi.Controllers
             }
         }
         
-        [HttpPut("PutOrders")]
+        [HttpPut("gamma")]
         public async Task<IActionResult> UpdateOrders(Orders p_resource)
         {
             try
@@ -59,7 +59,7 @@ namespace RetroBarbApi.Controllers
             }
         }
         
-        [HttpDelete("DeleteOrders")]
+        [HttpDelete("delta")]
         public async Task<IActionResult> DeleteOrders(Orders p_resource)
         {
             try

@@ -22,7 +22,7 @@ namespace RetroBarbApi.Controllers
             _memorycache = memoryCache;
         }
 
-        [HttpGet("GetAllCustomers")]
+        [HttpGet("alpha")]
         public async Task<IActionResult> GetAllCustomers()
         {
             try
@@ -36,7 +36,7 @@ namespace RetroBarbApi.Controllers
         }
 
 
-        [HttpPost("PostCustomers")]
+        [HttpPost("beta")]
         public async Task<IActionResult> AddCustomers(Customers p_resource)
         {
             try
@@ -50,7 +50,7 @@ namespace RetroBarbApi.Controllers
         }
         
 
-        [HttpPut("PutCustomers")]
+        [HttpPut("gamma")]
         public async Task<IActionResult> UpdateCustomers(Customers p_resource)
         {
             try
@@ -64,7 +64,7 @@ namespace RetroBarbApi.Controllers
         }
         
 
-        [HttpDelete("DeleteCustomers")]
+        [HttpDelete("delta")]
         public async Task<IActionResult> DeleteCustomers(Customers p_resource)
         {
             try

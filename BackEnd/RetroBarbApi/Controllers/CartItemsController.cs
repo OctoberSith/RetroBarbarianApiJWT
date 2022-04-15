@@ -20,7 +20,7 @@ namespace RetroBarbApi.Controllers
             _cartBL = cartBL;
         }
 
-        [HttpGet("GetAllCartItems")]
+        [HttpGet("alpha")]
         public async Task<IActionResult> GetAllCartItems()
         {
             try
@@ -34,7 +34,7 @@ namespace RetroBarbApi.Controllers
         }
 
         
-        [HttpPost("PostCartItems")]
+        [HttpPost("beta")]
         public async Task<IActionResult> AddCartItems(CartItems p_resource)
         {
             try
@@ -48,7 +48,7 @@ namespace RetroBarbApi.Controllers
         }
         
 
-        [HttpPut("PutCartItems")]
+        [HttpPut("gamma")]
         public async Task<IActionResult> UpdateCartItems(CartItems p_resource)
         {
             try
@@ -62,7 +62,7 @@ namespace RetroBarbApi.Controllers
         }
         
 
-        [HttpDelete("DeleteCartItems")]
+        [HttpDelete("delta")]
         public async Task<IActionResult> DeleteCartItems(CartItems p_resource)
         {
             try
