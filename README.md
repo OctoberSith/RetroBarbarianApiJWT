@@ -1,6 +1,6 @@
-# Online Gaming Mercantile Website and Inventory Management Application
+# WebApi Configured for Identity
 ## Project Description
-This project is a recreation of an earlier .NET console project combined with an ASP.NET Api linked to an Azure SQL database. The intended audience for this project is consumers shopping for products, with an additional Administration Service Application intended for Managers of the stores' inventories.  
+This Project is a WebApi configured with Jason Web Tokens (JWT). It serves as a demo and practice project. 
 ## Tech Stack
 ### Backend Technologies
 - Asp.net API
