@@ -319,7 +319,7 @@ public class RetroTesting
         string testOrderStatusCode = "Cancelled";
         Orders p_resource = new Orders(){
 
-            OrderStatusCode = testOrderStatusCode
+            OrderStatusCode = testOrderStatusCode,
         };
         Mock<IRepository<Orders>> mockRepo = new Mock<IRepository<Orders>>();
         mockRepo.Setup(repo => repo.Delete(p_resource)).ReturnsAsync(p_resource);
@@ -337,7 +337,8 @@ public class RetroTesting
     {
         string testProductName = "Nintendo";
         Products p_resource = new Products(){
-            ProductName = testProductName
+            ProductName = testProductName,
+            ProductPrice = 1.50M
         };
 
         Mock<IRepository<Products>> mockRepo = new Mock<IRepository<Products>>();

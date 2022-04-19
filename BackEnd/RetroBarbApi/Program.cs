@@ -2,7 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using RetroDL;
 using RetroBL;
 using RetroModels;
+// using Serilog;
 
+//Logger configuring [Serilog]
+// Log.Logger = new LoggerConfiguration()
+//     .WriteTo.File("./logs/logs.txt")
+//     .CreateLogger();
+
+// Log.Information("Api is now running.");
 var builder = WebApplication.CreateBuilder(args);
 
 // ******Add services to the container.*****************************************************************************************************
@@ -49,3 +56,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Log.Information("Api program is exited.");

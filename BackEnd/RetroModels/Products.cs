@@ -20,7 +20,6 @@ public class Products
         set { _productCompany = value; }
     }
     
-
     private decimal _productPrice;
     public decimal ProductPrice
     {

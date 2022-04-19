@@ -34,14 +34,5 @@ public class Stores
         get { return _storeZipcode; }
         set { _storeZipcode = value; }
     }
-    
-    
-    
-    
-
-
-
-
-
 
 }

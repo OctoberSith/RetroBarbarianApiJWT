@@ -20,13 +20,11 @@ public class Customers
         set { _customerLast = value; }
     }
     
-
     private int _birthMonth;
     public int BirthMonth
     {
         get { return _birthMonth; }
         set { _birthMonth = value; }
-    
     }
 
     private int _birthDay;
@@ -34,7 +32,6 @@ public class Customers
     {
         get { return _birthDay; }
         set { _birthDay = value; }
-    
     }
 
     private int _birthYear;
@@ -42,7 +39,6 @@ public class Customers
     {
         get { return _birthYear; }
         set { _birthYear = value; }
-    
     }
 
     private string _address;
@@ -94,5 +90,4 @@ public class Customers
         set { _password = value; }
     }
     
-
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RetroDL;
 
@@ -11,9 +12,10 @@ using RetroDL;
 namespace RetroDL.Migrations
 {
     [DbContext(typeof(RetroStoreDBContext))]
-    partial class RetroStoreDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220415203455_FourthMigration")]
+    partial class FourthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,10 @@ namespace RetroDL.Migrations
                     b.Property<int>("OrderID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductID")
+                    b.Property<int?>("OrdersOrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("ProductPrice")
@@ -47,9 +52,7 @@ namespace RetroDL.Migrations
 
                     b.HasKey("CartID");
 
-                    b.HasIndex("OrderID");
-
-                    b.HasIndex("ProductID");
+                    b.HasIndex("OrdersOrderID");
 
                     b.ToTable("CartItems");
                 });
@@ -125,10 +128,6 @@ namespace RetroDL.Migrations
 
                     b.HasKey("InventoryID");
 
-                    b.HasIndex("ProductID");
-
-                    b.HasIndex("StoreID");
-
                     b.ToTable("Inventory");
                 });
 
@@ -156,10 +155,6 @@ namespace RetroDL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("OrderID");
-
-                    b.HasIndex("CustomerID");
-
-                    b.HasIndex("StoreID");
 
                     b.ToTable("Orders");
                 });
@@ -213,57 +208,14 @@ namespace RetroDL.Migrations
 
             modelBuilder.Entity("RetroModels.CartItems", b =>
                 {
-                    b.HasOne("RetroModels.Orders", "Orders")
-                        .WithMany()
-                        .HasForeignKey("OrderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RetroModels.Products", "Products")
-                        .WithMany()
-                        .HasForeignKey("ProductID");
-
-                    b.Navigation("Orders");
-
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("RetroModels.Inventory", b =>
-                {
-                    b.HasOne("RetroModels.Products", "Products")
-                        .WithMany()
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RetroModels.Stores", "Stores")
-                        .WithMany()
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Products");
-
-                    b.Navigation("Stores");
+                    b.HasOne("RetroModels.Orders", null)
+                        .WithMany("OrderCart")
+                        .HasForeignKey("OrdersOrderID");
                 });
 
             modelBuilder.Entity("RetroModels.Orders", b =>
                 {
-                    b.HasOne("RetroModels.Customers", "Customers")
-                        .WithMany()
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RetroModels.Stores", "Stores")
-                        .WithMany()
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customers");
-
-                    b.Navigation("Stores");
+                    b.Navigation("OrderCart");
                 });
 #pragma warning restore 612, 618
         }

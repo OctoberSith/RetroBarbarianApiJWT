@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace RetroModels;
 public class Inventory
@@ -21,7 +22,6 @@ public class Inventory
         set { _productPrice = value; }
     }
     
-    
     private int _inventoryQuantity;
     public int InventoryQuantity
     {
@@ -36,9 +36,10 @@ public class Inventory
         set { _storeID = value; }
     }
     
-    
+    [JsonIgnore]
     [ForeignKey("StoreID")]
     public virtual Stores Stores { get; set; }
+    [JsonIgnore]
     [ForeignKey("ProductID")]
     public virtual Products Products { get; set; }
     

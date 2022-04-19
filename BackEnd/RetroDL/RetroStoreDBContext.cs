@@ -25,8 +25,6 @@ namespace RetroDL
 
         protected override void OnModelCreating(ModelBuilder p_ModelBuilder)
         {
-
-            base.OnModelCreating(p_ModelBuilder);
             p_ModelBuilder.Entity<Products>()
                 .Property(p => p.ProductPrice)
                 .HasColumnType("decimal(10,2)");
@@ -39,6 +37,10 @@ namespace RetroDL
             p_ModelBuilder.Entity<Orders>()
                 .Property(p => p.OrderTotal)
                 .HasColumnType("decimal(10,2)");
+
+            p_ModelBuilder.Entity<Orders>().Ignore(x => x.OrderCart);
+            base.OnModelCreating(p_ModelBuilder);
+
         }
 
     }

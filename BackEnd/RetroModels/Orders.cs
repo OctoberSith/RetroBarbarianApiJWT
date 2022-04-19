@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace RetroModels;
 
@@ -23,7 +24,7 @@ public class Orders
         set { _orderDate = value; }
     }
     
-
+    [NotMapped]
     private List<CartItems> _orderCart = new List<CartItems>();
     public List<CartItems> OrderCart { get => _orderCart; set => _orderCart = value; }
 
@@ -49,9 +50,10 @@ public class Orders
         set { _storeID = value; }
     }
     
-    
+    [JsonIgnore]
     [ForeignKey("StoreID")]
     public virtual Stores Stores { get; set; }
+    [JsonIgnore]
     [ForeignKey("CustomerID")]
     public virtual Customers Customers { get; set; }
 }

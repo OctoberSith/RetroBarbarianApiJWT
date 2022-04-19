@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace RetroModels;
 
@@ -13,13 +14,6 @@ public class CartItems
     {
         get { return _orderID; }
         set { _orderID = value; }
-    }
-
-    private int _productID;
-    public int ProductID
-    {
-        get { return _productID; }
-        set { _productID = value; }
     }
 
     private decimal _productPrice;
@@ -43,9 +37,10 @@ public class CartItems
         set { _orderDate = value; }
     }
 
+    [JsonIgnore]
     [ForeignKey("ProductID")]
     public virtual Products Products { get; set; }
-
+    [JsonIgnore]
     [ForeignKey("OrderID")]
     public virtual Orders Orders { get; set; }
 
