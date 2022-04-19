@@ -25,10 +25,12 @@ namespace RetroBarbApi.Controllers
         {
             try
             {
+                Log.Information("Call for GetAllProducts is ok.");
                 return Ok(await _prodBL.GetAll());
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Products Not Found.");
                 return StatusCode(404, "Not Found");
             }
         }
@@ -38,10 +40,12 @@ namespace RetroBarbApi.Controllers
         {
             try
             {
+                Log.Information("Products Added.");
                 return Ok(await _prodBL.Add(p_resource));
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Products Not Added.");
                 return StatusCode(404, "Not Found");
             }
         }
@@ -51,10 +55,12 @@ namespace RetroBarbApi.Controllers
         {
             try
             {
+                Log.Information("Products Updated.");
                 return Ok( await _prodBL.Update(p_resource));
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Products Not Updated.");
                 return StatusCode(404, "Not Found");
             }
         }
@@ -64,10 +70,12 @@ namespace RetroBarbApi.Controllers
         {
             try
             {
+                Log.Information("Products Deleted.");
                 return Ok(await _prodBL.Delete(p_resource));
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Products Not Deleted.");
                 return StatusCode(404, "Not Found");
             }
         }

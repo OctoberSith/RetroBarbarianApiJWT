@@ -1,0 +1,4 @@
+2022-04-19 16:01:11.813 -04:00 [INF] Api is now running.
+2022-04-19 16:01:32.566 -04:00 [INF] Api program is exited.
+2022-04-19 16:07:46.235 -04:00 [INF] Api is now running.
+2022-04-19 16:07:49.708 -04:00 [INF] Api program is exited.

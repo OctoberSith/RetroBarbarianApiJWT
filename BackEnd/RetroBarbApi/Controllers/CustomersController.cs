@@ -27,10 +27,12 @@ namespace RetroBarbApi.Controllers
         {
             try
             {
+                Log.Information("Call for GetAllCustomers is ok.");
                 return Ok(await _custBL.GetAll());
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Customers Not Found.");
                 return StatusCode(404, "Not Found");
             }
         }
@@ -41,10 +43,12 @@ namespace RetroBarbApi.Controllers
         {
             try
             {
+                Log.Information("Customers Added.");
                 return Ok(await _custBL.Add(p_resource));
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Customers Not Added.");
                 return StatusCode(404, "Not Found");
             }
         }
@@ -55,10 +59,12 @@ namespace RetroBarbApi.Controllers
         {
             try
             {
+                Log.Information("Customers Updated.");
                 return Ok(await _custBL.Update(p_resource));
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Customers Not Updated.");
                 return StatusCode(404, "Not Found");
             }
         }
@@ -68,11 +74,13 @@ namespace RetroBarbApi.Controllers
         public async Task<IActionResult> DeleteCustomers(Customers p_resource)
         {
             try
-            {
+            {   
+                Log.Information("Customers Deleted.");
                 return Ok(await _custBL.Delete(p_resource));   
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Customers Not Deleted.");
                 return StatusCode(404, "Not Found");
             }
         }

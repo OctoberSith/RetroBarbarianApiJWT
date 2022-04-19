@@ -23,12 +23,14 @@ namespace RetroBarbApi.Controllers
         [HttpGet("alpha")]
         public async Task<IActionResult> GetAllInventory()
         {
+            
             try
-            {
+            {   Log.Information("Call for GetAllInventory is ok.");
                 return Ok(await _invBL.GetAll());
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Inventory Not Found.");
                 return StatusCode(404, "Not Found");
             }
         }
@@ -37,11 +39,13 @@ namespace RetroBarbApi.Controllers
         public async Task<IActionResult> AddInventory(Inventory p_resource)
         {
             try
-            {
+            {   
+                Log.Information("Inventory Added.");
                 return Ok(await _invBL.Add(p_resource));
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Inventory Not Added.");
                 return StatusCode(404, "Not Found");
             }
         }
@@ -51,10 +55,12 @@ namespace RetroBarbApi.Controllers
         {
             try
             {
+                Log.Information("Inventory Updated.");
                 return Ok( await _invBL.Update(p_resource));
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Inventory Not Updated.");
                 return StatusCode(404, "Not Found");
             }
         }
@@ -64,10 +70,12 @@ namespace RetroBarbApi.Controllers
         {
             try
             {
+                Log.Information("Inventory Deleted.");
                 return Ok(await _invBL.Delete(p_resource));
             }
             catch (BadHttpRequestException)
             {
+                Log.Information("Inventory Not Deleted.");
                 return StatusCode(404, "Not Found");
             }
         }

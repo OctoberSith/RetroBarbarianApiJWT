@@ -1,19 +1,21 @@
+global using Serilog;
 using Microsoft.EntityFrameworkCore;
 using RetroDL;
 using RetroBL;
 using RetroModels;
-// using Serilog;
 
-//Logger configuring [Serilog]
-// Log.Logger = new LoggerConfiguration()
-//     .WriteTo.File("./logs/logs.txt")
-//     .CreateLogger();
 
-// Log.Information("Api is now running.");
+
 var builder = WebApplication.CreateBuilder(args);
 
-// ******Add services to the container.*****************************************************************************************************
 
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("./logs/logs.txt")
+    .CreateLogger();
+Log.Information("Api is now running.");
+
+
+// ******Add services to the container.*****************************************************************************************************
 // Added Cache for Demo purposes, not implemented
 builder.Services.AddMemoryCache();
 builder.Services.AddControllers();
@@ -57,4 +59,4 @@ app.MapControllers();
 
 app.Run();
 
-// Log.Information("Api program is exited.");
+Log.Information("Api program is exited.");
