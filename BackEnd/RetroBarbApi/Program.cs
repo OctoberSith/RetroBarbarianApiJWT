@@ -24,7 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Add DbContext Conect String Configuration through Options
-builder.Services.AddDbContext<RetroStoreDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Ref2DB")));
+builder.Services.AddDbContext<RetroStoreDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Ref2DB")));
 
 //BL Scoped Dependencies
 builder.Services.AddScoped<IRetroBL<Customers>, CustomersBL>();
