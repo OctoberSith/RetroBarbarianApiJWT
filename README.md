@@ -6,7 +6,7 @@ This Project is a WebApi configured with Jason Web Tokens (JWT). It serves as a 
 - Asp.net API
 - Entity Framework Core
 - ElephantSQL Cloud
-- PostGresSQL
+- PostgreSQL
 - Xunit
 - Serilog
 - ThunderClient
