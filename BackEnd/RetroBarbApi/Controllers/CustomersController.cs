@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using RetroModels;
 using RetroBL;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RetroBarbApi.Controllers
 {
@@ -22,7 +23,7 @@ namespace RetroBarbApi.Controllers
             _memorycache = memoryCache;
         }
 
-        [HttpGet("alpha")]
+        [HttpGet("alpha"), Authorize(Roles = "User")]
         public async Task<IActionResult> GetAllCustomers()
         {
             try
@@ -38,7 +39,7 @@ namespace RetroBarbApi.Controllers
         }
 
 
-        [HttpPost("beta")]
+        [HttpPost("beta"), Authorize(Roles = "User")]
         public async Task<IActionResult> AddCustomers(Customers p_resource)
         {
             try
@@ -54,7 +55,7 @@ namespace RetroBarbApi.Controllers
         }
         
 
-        [HttpPut("gamma")]
+        [HttpPut("gamma"), Authorize(Roles = "User")]
         public async Task<IActionResult> UpdateCustomers(Customers p_resource)
         {
             try
@@ -70,7 +71,7 @@ namespace RetroBarbApi.Controllers
         }
         
 
-        [HttpDelete("delta")]
+        [HttpDelete("delta"), Authorize(Roles = "User")]
         public async Task<IActionResult> DeleteCustomers(Customers p_resource)
         {
             try

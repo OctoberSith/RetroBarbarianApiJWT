@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RetroModels;
 using RetroBL;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RetroBarbApi.Controllers
 {
@@ -20,7 +21,7 @@ namespace RetroBarbApi.Controllers
             _prodBL = prodBL;
         }
 
-        [HttpGet("alpha")]
+        [HttpGet("alpha"), Authorize(Roles = "User")]
         public async Task<IActionResult> GetAllStores()
         {
             try
@@ -35,7 +36,7 @@ namespace RetroBarbApi.Controllers
             }
         }
         
-        [HttpPost("beta")]
+        [HttpPost("beta"), Authorize(Roles = "User")]
         public async Task<IActionResult> AddStores(Stores p_resource)
         {
             try
@@ -50,7 +51,7 @@ namespace RetroBarbApi.Controllers
             }
         }
         
-        [HttpPut("gamma")]
+        [HttpPut("gamma"), Authorize(Roles = "User")]
         public async Task<IActionResult> UpdateStores(Stores p_resource)
         {
             try
@@ -65,7 +66,7 @@ namespace RetroBarbApi.Controllers
             }
         }
         
-        [HttpDelete("delta")]
+        [HttpDelete("delta"), Authorize(Roles = "User")]
         public async Task<IActionResult> DeleteStores(Stores p_resource)
         {
             try

@@ -3,8 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using RetroDL;
 using RetroBL;
 using RetroModels;
-
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,13 +18,34 @@ Log.Logger = new LoggerConfiguration()
 Log.Information("Api is now running.");
 
 
-// ******Add services to the container.*****************************************************************************************************
 // Added Cache for Demo purposes, not implemented
 builder.Services.AddMemoryCache();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Will need to enter bearer + token to enter the API methods
+builder.Services.AddSwaggerGen(options =>{
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme 
+    {
+        Description = "Standard Authorization Header Using the Bearer Scheme (\"bearer {token}\")",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    options.OperationFilter<SecurityRequirementsOperationFilter>();
+});
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>{
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+            .GetBytes(builder.Configuration.GetSection("Appsettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 //Add DbContext Conect String Configuration through Options
 builder.Services.AddDbContext<RetroStoreDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Ref2DB")));
@@ -52,6 +76,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//Must be above Authorization
+app.UseAuthentication();
 
 app.UseAuthorization();
 
