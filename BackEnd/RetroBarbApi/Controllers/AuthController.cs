@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RetroModels;
@@ -18,6 +13,7 @@ namespace RetroBarbApi.Controllers
     {
         public static User user = new User();
 
+        //TODO:implement a Add User to DB method Method or something close
         private readonly IConfiguration _configuration;
         public AuthController(IConfiguration configuration)
         {
@@ -25,7 +21,7 @@ namespace RetroBarbApi.Controllers
         }
         
 
-        [HttpPost("engrafis")]
+        [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDto request)
         {
             CreatePasswordHash(request.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
@@ -37,7 +33,7 @@ namespace RetroBarbApi.Controllers
             return Ok(user);
         }
 
-        [HttpPost("syndesi")]
+        [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UserDto request)
         {
             if(user.UserName != request.UserName)
@@ -50,7 +46,8 @@ namespace RetroBarbApi.Controllers
                 return BadRequest("Password Incorrect");
             }
 
-            return Ok("Crazy Token");
+            string token = CreateToken(user);
+            return Ok(token);
         }
 
         private string CreateToken(User user)
