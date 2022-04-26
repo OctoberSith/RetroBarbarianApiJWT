@@ -1,4 +1,5 @@
 global using Serilog;
+global using RetroBarbApi.Services.UserService;
 using Microsoft.EntityFrameworkCore;
 using RetroDL;
 using RetroBL;
@@ -23,7 +24,10 @@ builder.Services.AddMemoryCache();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-// Will need to enter bearer + token to enter the API methods
+// Will need to enter bearer + generated token to enter the API methods from the Swagger OpenAPI
+builder.Services.AddScoped<IUserService, UserService>();
+//HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen(options =>{
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme 
     {

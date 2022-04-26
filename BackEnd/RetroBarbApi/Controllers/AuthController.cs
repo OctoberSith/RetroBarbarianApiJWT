@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RetroModels;
@@ -11,15 +12,36 @@ namespace RetroBarbApi.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        //Hardcoding to sub for a database
         public static User user = new User();
 
         //TODO:implement a Add User to DB method Method or something close
         private readonly IConfiguration _configuration;
-        public AuthController(IConfiguration configuration)
+        private readonly IUserService _userService;
+
+        public AuthController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
+            _userService = userService;
         }
         
+        //Method 1, This is not best practice - for Demo Purposes only
+        // [HttpGet, Authorize]
+        // public ActionResult<object> GetMe()
+        // {
+        //     var userName = User?.Identity?.Name;
+        //     var userName2 = User.FindFirstValue(ClaimTypes.Name);
+        //     var role = User.FindFirstValue(ClaimTypes.Role);
+        //     return Ok(new { userName, userName2, role});
+        // }
+
+        //Method 2, which is the best practice, injected service
+        [HttpGet, Authorize]
+        public ActionResult<string> GetMe()
+        {
+            var userName = _userService.GetMyName();
+            return Ok(userName);
+        }
 
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserDto request)
